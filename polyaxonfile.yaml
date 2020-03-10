@@ -1,0 +1,61 @@
+---
+version: 1
+
+kind: experiment
+
+framework: tensorflow
+
+tags: [sacrum_navigation]
+
+build:
+  image: tensorflow/tensorflow:1.15.0-gpu-py3
+  build_steps:
+    - pip install -r requirements.txt
+
+environment:
+  resources:
+    cpu:
+      requests: 3
+      limits: 4
+    memory:
+      requests: 8048
+      limits: 32784
+    gpu:
+      requests: 1
+      limits: 1
+
+declarations:
+  run_name:         "Gym_Sacrum_Env"
+  env:              "gym_sacrum_nav:sacrum_nav-v2"
+  tensorboard_log:  "./runs/"
+
+  # Framework parameters
+  trained_agent:    ""
+  algo:             "dqn"
+  log_interval:     -1
+  log_folder:       "logs"
+  data_folder:      "./data/"
+  seed:             0
+  verbose:          1
+
+run:
+  cmd: apt update && apt install -y git &&
+       apt install -y libopenmpi-dev &&
+       pip install --upgrade pip &&
+       pip install mpi4py &&
+       apt-get install -y libsm6 libxext6 libxrender-dev &&
+       pip install -e gym_sacrum_nav &&
+       pip install -e git+git://github.com/hhase/stable-baselines#egg=stable-baselines &&
+       python -u main_prev_actions.py --env={{ env }}\
+                        -tb={{ tensorboard_log }}\
+                        -i={{ trained_agent }}\
+                        --algo={{ algo }}\
+                        --log-interval={{ log_interval }}\
+                        -f={{ log_folder }}\
+                        --data-folder={{ data_folder }}\
+                        --seed={{ seed }}\
+                        --n-trials={{ n_trials }}\
+                        --n-jobs={{ n_jobs }}\
+                        --sampler={{ sampler }}\
+                        --pruner={{ pruner }}\
+                        --verbose={{ verbose }}
