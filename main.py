@@ -26,7 +26,7 @@ OUTPUT_PATH = ""
 #
 ########################################################################################################################
 # SET ENVIRONMENT PARAMETERS
-env_params = {'data_path': "",
+env_params = {'data_path': DATA_PATH,
               'verbose': 1,
               'test_patients': 5,
               'val_patients': 4,
@@ -38,7 +38,12 @@ env_params = {'data_path': "",
               'chebishev': False,
               'no_nop': False,
               'max_time_steps': True,
-              'time_step_limit': 50}
+              'time_step_limit': 50,
+              'reward_goal_correct': 1.0,
+              'reward_goal_incorrect': -0.25,
+              'reward_move_closer': 0.05,
+              'reward_move_further': -0.1,
+              'reward_border_collision': -0.1}
 # parameters to define the environment
 #
 ########################################################################################################################
