@@ -33,3 +33,4 @@ To run the code, first, some parameters need to be set.
  - `no_nop`: boolean that removes the stopping action from the action space. Used for MS-DQN architecture.
  - `max_time_steps`: boolean that enables resetting the agent when it takes too long to reach a goal state.
  - `time_step_limit`: the amount of time steps the agent has to reach a goal state.
+ - `reward_[action]`: sets the rewards given to the agent depending on its actions on the environment.
