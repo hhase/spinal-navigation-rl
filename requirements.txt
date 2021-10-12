@@ -6,4 +6,4 @@ polyaxon-client==0.5.6
 gym==0.14.0
 optuna==0.18.1
 scikit-image==0.15.0
-opencv-python==4.1.1.26
+opencv-python==4.2.0.32
